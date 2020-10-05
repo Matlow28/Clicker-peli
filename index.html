@@ -1,7 +1,23 @@
 <!DOCTYPE html> 
 
 <script type="text/javascript">
-var cookiecount = 0;
+
+function  update(){
+    document.getElementById('text').value = cookiecount;
+    document.title = cookiecount + " Cookies";
+    document.getElementById('ammountAutoClick').innerHTML = "You Own" + autoClick + "Auto Clickers";
+    document.getElementById('costAutoClick').innerHTML = ((autoClick+1) * 12) + "Coockies";
+}
+
+    var cookiecount = 0;
+    var autoClick = 0;
+
+function timer() {
+    computercount = computercount + autoClick
+    update()
+}
+setInterval(timer, 2000)
+
 </script>
 
 <link rel="stylesheet" href="keksi.css">
@@ -11,33 +27,48 @@ var cookiecount = 0;
         <title>Cookie Clicker</title>
     </head>
     <body>
-        
-        <a href=# onclick="add()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTiBUJEuM9wFTCoGuewSPR53cxjvcdNA-u6pQ&usqp=CAU"></a>
+
+        <a href=# onclick="add()"><img src="https://images-ext-1.discordapp.net/external/aGHnj5AgESKgfmvB-teCLf3_DPI7Ap1tKtbVlLHZMN4/%3Fq%3Dtbn%253AANd9GcTiBUJEuM9wFTCoGuewSPR53cxjvcdNA-u6pQ%26usqp%3DCAU%2522%253E%253C%2Fa%253E/https/encrypted-tbn0.gstatic.com/images"</a>
         <br><br>
         You have:
         <input type="text" id="text" disabled style= text-align:center>
-               <script type="text/javascript">
+        <script type="text/javascript">
         function add() {
-        cookiecount = cookiecount + 1
-                   document.getElementById('text').value = cookiecount;
-                   document.title = cookiecount + " Cookies";
-                   }
+                cookiecount = cookiecount + 1
+                update()
+        }
         </script>
         Cookies
         <br><br>
-        
+
         <button><a href="#" onClick="save()">Save</a></button>
         <button><a href="#" onClick="load()">Load</a></button>
-        
+        <br><br>
+
+        <p>Buy 1 Auto Clicker</p>
+        <button><a href="#" onClick="buyAutoClick()"><img src=https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTWo32w7sTfbaPUYxCQynFqvrYUIfz_NcWjlw&usqp=CAU width="40px" height="50px">
+        </a></button>
+        <p id="costAutoClick">12 coockies</p>
+        <p id="ammountAutoClick">You Own = Auto Clickers</p>
+
         <script type="text/javascript">
         function save() {
             localStorage.setItem("cookiecount", cookiecount);
+            localStorage.setItem("autoClick", autoClick);
             }
             function load() {
                 cookiecount = localStorage.getItem("cookiecount");
                 cookiecount = parseInt(cookiecount);
-                document.getElementById('text').value = cookiecount;
-                document.title = cookiecount + " Cookies";
+                autoClick = localStorage.getItem("autoClick");
+                autoClick = parseInt(autoClick);
+                update()
+            }
+            function buyAutoClick() {
+                if (cookiecount >= ((autoClick+1) * 12)) {
+                    cookiecount = cookiecount - ((autoClick+1) * 12);
+                    autoClick = autoClick + 1;
+                    update()
+                }
             }
         </script>
     </body>
