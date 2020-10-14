@@ -5,23 +5,30 @@ function  update(){
     document.getElementById('text').value = cookiecount;
     document.title = cookiecount + "Cookies";
     document.getElementById('ammountAutoClick').innerHTML = "You Own" + autoClick + "Auto Clickers";
-    document.getElementById('costAutoClick').innerHTML = ((autoClick+1) * 12) + "Coockies";
+    document.getElementById('costAutoClick').innerHTML = ((autoClick+1) * 15) + "Coockies";
+
+    document.getElementById('ammountGrans').innerHTML = "You Own" + grans - " Grans";
+    document.getElementById('costGrans').innerHTML = ((grans+1) * 50) + "Cookies";
     }
 
     var cookiecount = 0;
     var autoClick = 0;
+    var grans = 0;
 
     function timer() {
-        computercount = computercount + autoClick
+        cookiecount = cookiecount + autoClick;
+        cookiecount = cookiecount + grans*2;
         update()
     }
-    setInterval(timer, 2000)
+    setInterval(timer, 1000)
 </script>
     <html lang="en">
     <head><title>Cookie Clicker</title></head>
     <body>
 
-        <a href=# onclick="add()"><img src="https://images-ext-1.discordapp.net/external/aGHnj5AgESKgfmvB-teCLf3_DPI7Ap1tKtbVlLHZMN4/%3Fq%3Dtbn%253AANd9GcTiBUJEuM9wFTCoGuewSPR53cxjvcdNA-u6pQ%26usqp%3DCAU%2522%253E%253C%2Fa%253E/https/encrypted-tbn0.gstatic.com/images"</a>
+        <p></p>
+
+        <a href=# onclick="add()"><img src="https://images-ext-1.discordapp.net/external/aGHnj5AgESKgfmvB-teCLf3_DPI7Ap1tKtbVlLHZMN4/%3Fq%3Dtbn%253AANd9GcTiBUJEuM9wFTCoGuewSPR53cxjvcdNA-u6pQ%26usqp%3DCAU%2522%253E%253C%2Fa%253E/https/encrypted-tbn0.gstatic.com/images"></a>
         <br><br>
         You have:
         <input type="text" id="text" disabled style= text-align:center>
@@ -39,27 +46,44 @@ function  update(){
         <br><br>
 
         <p>Buy 1 Auto Clicker</p>
-        <button><a href="#" onClick="buyAutoClick()"><img src=https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTWo32w7sTfbaPUYxCQynFqvrYUIfz_NcWjlw&usqp=CAU width="40px" height="50px">
-        </a></button>
-        <p id="costAutoClick">12 cookies</p>
+        <button><a href="#" onClick="buyAutoClick()"><img src=https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTWo32w7sTfbaPUYxCQynFqvrYUIfz_NcWjlw&usqp=CAU 
+            width="60px" height="70px"></a></button>
+        <p id="costAutoClick">15 cookies</p>
         <p id="ammountAutoClick">You Own 0 Auto Clickers</p>
+
+        <p>Buy 1 Granny</p>
+        <button><a href="#" onclick="buyGran()"><img src="https://images-ext-1.discordapp.net/external/BGeIMuje6iLErtanxPpMbrw-vvAHNXLJgQEP658ODM0/https/i.pinimg.com/originals/0f/a7/93/0fa793b044a7c19261d4589ae6482c5f.jpg?width=239&height=300"
+            width="60px" height="70px"></a></button>
+        <p id="costGrans">50 coockies</p>
+        <p id="ammountGrans">You Own 0 Grannys</p>
 
         <script>
         function save() {
             localStorage.setItem("cookiecount", cookiecount);
             localStorage.setItem("autoClick", autoClick);
+            localStorage.setItem("grans", grans);
             }
             function load() {
                 cookiecount = localStorage.getItem("cookiecount");
                 cookiecount = parseInt(cookiecount);
                 autoClick = localStorage.getItem("autoClick");
                 autoClick = parseInt(autoClick);
+                grans = localStorage.getItem("grans");
+                grans = parseInt(grans);
                 update()
             }
             function buyAutoClick() {
-                if (cookiecount >= ((autoClick+1) * 12)) {
-                    cookiecount = cookiecount - ((autoClick+1) * 12);
+                if (cookiecount >= ((autoClick+1) * 15)) {
+                    cookiecount = cookiecount - ((autoClick+1) * 15);
                     autoClick = autoClick + 1;
+                    update()
+                }
+            }
+
+            function buyGran() {
+                if (cookiecount >= ((grans+1) * 50)) {
+                    cookiecount = cookiecount - ((grans+1) * 50);
+                    grans = grans + 1;
                     update()
                 }
             }
