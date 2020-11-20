@@ -4,24 +4,29 @@
 function  update(){
     document.getElementById('text').value = cookiecount;
     document.title = cookiecount + "Cookies";
-    document.getElementById('ammountAutoClick').innerHTML = "You Own" + autoClick + "Auto Clickers";
+    document.getElementById('ammountAutoClick').innerHTML = "You Own " + autoClick + " Auto Clickers";
     document.getElementById('costAutoClick').innerHTML = ((autoClick+1) * 15) + "Cookies";
 
-    document.getElementById('ammountGrannys').innerHTML = "You Own" + grans - "Grannys";
+    document.getElementById('ammountGrannys').innerHTML = "You Own " + grans + " Grannys";
     document.getElementById('costGrans').innerHTML = ((grans+1) * 50) + "Cookies";
 
+    document.getElementById('ammountBakerys').innerHTML = "You Own " + bakerys + " Bakerys";
+    document.getElementById('costBakerys').innerHTML = ((bakerys+1) * 1000) + "Cookies";
+
     document.getElementById('cookiespersecond').innerHTML = "You are gaining" + 
-    (((autoClick)+(grans*2))*multiplier) + "Cookies per/s";
+    (((autoClick)+(grans*2)+(bakerys*15))*multiplier) + "Cookies per/s";
 }
 
     var multiplier = 1;
     var cookiecount = 0;
     var autoClick = 0;
     var grans = 0;
+    var bakerys = 0;
 
     function timer() {
         cookiecount = cookiecount + autoClick;
         cookiecount = cookiecount + grans*2;
+        cookiecount = cookiecount + bakerys*15;
         update()
     }
     setInterval(timer, 1000)
@@ -55,9 +60,8 @@ function  update(){
         src=https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTWo32w7sTfbaPUYxCQynFqvrYUIfz_NcWjlw&usqp=CAU 
             width="60px" height="70px"></a></button>
         <p id="costAutoClick">15 cookies</p>
-        <p id="ammountAutoClick">You Own 0 Auto Clickers</p>
 
-        <br>
+        <p id="ammountAutoClick">You Own 0 Auto Clickers</p>
 
         <p>Buy 1 Granny</p>
         <button><a href="#" onclick="buyGran()"><img 
@@ -67,11 +71,22 @@ function  update(){
 
         <p id="ammountGrannys">You Own 0 Grannys</p>
 
+        <p>Buy 1 Bakery</p>
+        <button><a href="#" onclick="buyBakery()"><img 
+        src="https://www.clker.com/cliparts/1/7/3/7/15164467111100518841factory-clipart-free.med.png"
+            width="60px" height="70px"></a></button>
+        <p id="costBakerys">1000 cookies</p>
+
+        <p id="ammountBakerys">You Own 0 Bakerys</p>
+
+       <br>
+
         <script>
         function save() {
             localStorage.setItem("cookiecount", cookiecount);
             localStorage.setItem("autoClick", autoClick);
             localStorage.setItem("grans", grans);
+            localStorage.setItem("bakerys", bakerys);
             }
             function load() {
                 cookiecount = localStorage.getItem("cookiecount");
@@ -80,6 +95,8 @@ function  update(){
                 autoClick = parseInt(autoClick);
                 grans = localStorage.getItem("grans");
                 grans = parseInt(grans);
+                grans = localStorage.getItem("bakerys");
+                grans = parseInt(bakerys);
                 update()
             }
             function buyAutoClick() {
@@ -94,6 +111,13 @@ function  update(){
                 if (cookiecount >= ((grans+1) * 50)) {
                     cookiecount = cookiecount - ((grans+1) * 50);
                     grans = grans + 1;
+                    update()
+                }
+            }
+            function buyBakery() {
+                if (cookiecount >= ((bakerys+1) * 1000)) {
+                    cookiecount = cookiecount - ((bakerys+1) * 1000);
+                    bakerys = bakerys + 1;
                     update()
                 }
             }
